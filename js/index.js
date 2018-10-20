@@ -32,7 +32,6 @@ function displayList(data2) {
     listParent.appendChild(listItem);
   }
   displayParent.appendChild(listParent);
-  console.log(listParent);
 }
 
 function formatTypeText(str) {
