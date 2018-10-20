@@ -73,20 +73,38 @@ class App extends React.Component{
 
 class Child extends React.Component{
 
+  formatTypeText(str) {
+    // reference for title case: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+    str = str.replace(/_/g, " ")
+    str = str.replace(/-/g, " ")
+    return str.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+      });
+  }
+
+  sortList(data) {
+    return data.sort(function(a, b){
+      if(a.title < b.title) return -1;
+      if(a.title > b.title) return 1;
+      return 0;
+    })
+  }
+
    delete(id){
-       this.props.delete(id);
+     // reference https://stackoverflow.com/questions/43230622/reactjs-how-to-delete-item-from-list
+     this.props.delete(id);
    }
 
    render(){
       return(
-         <ul>
+         <ul className="list-group">
            {
-              this.props.data.map(el=>
-                  <li key={el.id} className="listItem">
+              this.sortList(this.props.data).map(el=>
+                  <li key={el.id} className="list-group-item listItem">
                     <h3>{el.title}</h3>
-                    <span>{el.type}</span>
+                    <span>{this.formatTypeText(el.type)}</span>
                     <hr/>
-                    <button onClick={this.delete.bind(this, el)} className="removeButton">REMOVE</button>
+                    <button onClick={this.delete.bind(this, el)} type="button" className="btn btn-danger">REMOVE</button>
                   </li>
               )
            }
