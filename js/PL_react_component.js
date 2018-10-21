@@ -84,8 +84,8 @@ class PL_List extends React.Component{
 
   sortList(data) {
     return data.sort(function(a, b){
-      if(a.title < b.title) return -1;
-      if(a.title > b.title) return 1;
+      if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+      if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
       return 0;
     })
   }

@@ -1,46 +1,59 @@
+(function() {
 /*
-  Initialize Functions
+  Initialize
+	Run `displayList()` by default
+	Attach event listeners to the parent element with id `dataDisplay`
+	This allows event delegation to th children it gains later
 */
+displayList(sortList(data));
 
-// make copy of data so emulation can rerun on refresh
-var data2 = data.slice(0);
-displayList(sortList(data2));
+var dataDisplay = document.getElementById("dataDisplay")
 
 document.getElementById("dataDisplay").addEventListener("click", function(e) {
-  // event delegation
+  // event delegation from #dataDisplay
 	if(e.target && e.target.nodeName == "BUTTON") {
-    var removeIndex = data2.map(function(item) { return item.id; })
+    var removeIndex = data.map(function(item) { return item.id; })
                            .indexOf(e.target.id);
-    for( var i = 0; i < data2.length; i++){
+    for( var i = 0; i < data.length; i++){
        if ( i === removeIndex) {
-         data2.splice(i, 1);
+         data.splice(i, 1);
        }
     }
-    displayList(data2);
+    displayList(data);
 		console.log("Button ", e.target.id, " pressed");
 	}
 });
 
-function displayList(data2) {
+/*
+  Functions
+	displayList() - Dynamically creates a list with children per spec from the write up
+	formatTypeText() - Takes a string and returns it in Title Case with all dashes and underscores replaced with spaces
+	sortList() - returns a the passed list sorted by its `title` attribute
+*/
+
+function displayList(data) {
+	// already assigned, do not use `var`
 	displayParent = document.getElementById('dataDisplay');
 	displayParent.innerHTML = "";
+
 	var listParent = document.createElement('ul');
 	listParent.className = "list-group"
-	if (data2.length>0){
-	  for (var i in data2) {
-	    h3 = document.createElement('h3');
-	    h3.innerHTML = data2[i].title;
 
-	    span = document.createElement('span');
-	    span.innerHTML = formatTypeText(data2[i].type);
+	if (data.length>0){
+	  for (var i in data) {
+	    var h3 = document.createElement('h3');
+	    h3.innerHTML = data[i].title;
 
-	    removeButton = document.createElement('button');
+	    var span = document.createElement('span');
+	    span.innerHTML = formatTypeText(data[i].type);
+
+	    var removeButton = document.createElement('button');
 	    removeButton.className = "btn btn-danger";
 			removeButton.type = "button";
 	    removeButton.innerHTML = "REMOVE";
-	    removeButton.id = data2[i].id
+	    removeButton.id = data[i].id
 
-	    listItem = document.createElement('li');
+	    var listItem = document.createElement('li');
 	    listItem.className = "list-group-item listItem"
 	    listItem.appendChild(h3);
 	    listItem.appendChild(span);
@@ -77,36 +90,13 @@ function toTitleCase(str) {
 
 function sortList(data) {
   return data.sort(function(a, b){
-    if(a.title < b.title) return -1;
-    if(a.title > b.title) return 1;
+    if(a.title.toLowerCase() < b.title.toLowerCase()) return -1;
+    if(a.title.toLowerCase() > b.title.toLowerCase()) return 1;
     return 0;
   })
-}
-
-function removeButton(id){
-  data2 = data2.some(function(item, index) {
-  	if(data2[index][id] === delID){
-  		// found it!
-  		data2.splice(index, 1);
-  		return true; // stops the loop
-  	}
-  	return false;
-  });
-  displayList(data2);
-}
-
-function removeByKey(array, delID){
-  data2.some(function(item, index) {
-  	if(data2[index][id] === delID){
-  		// found it!
-  		data2.splice(index, 1);
-  		return true; // stops the loop
-  	}
-  	return false;
-  });
-  return array;
 }
 
 /*
   End File
 */
+})();
