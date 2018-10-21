@@ -7,7 +7,7 @@
 */
 displayList(sortList(data));
 
-var dataDisplay = document.getElementById("dataDisplay")
+var dataDisplay = document.getElementById("dataDisplay");
 
 document.getElementById("dataDisplay").addEventListener("click", function(e) {
   // event delegation from #dataDisplay
@@ -32,8 +32,7 @@ document.getElementById("dataDisplay").addEventListener("click", function(e) {
 */
 
 function displayList(data) {
-	// already assigned, do not use `var`
-	displayParent = document.getElementById('dataDisplay');
+	var displayParent = document.getElementById('dataDisplay');
 	displayParent.innerHTML = "";
 
 	var listParent = document.createElement('ul');
@@ -71,13 +70,13 @@ function displayList(data) {
 }
 
 function formatTypeText(str) {
-  var str2 = stripDashUnderscore(str)
-  return toTitleCase(str2)
+  var str2 = stripDashUnderscore(str);
+  return toTitleCase(str2);
 }
 
 function stripDashUnderscore(str) {
-  var str2 = str.replace(/_/g, " ")
-  return str2.replace(/-/g, " ")
+  var str2 = str.replace(/_/g, " ");
+  return str2.replace(/-/g, " ");
 }
 
 // reference for title case: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
