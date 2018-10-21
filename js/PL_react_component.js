@@ -72,6 +72,10 @@ class App extends React.Component{
 }
 
 class PL_List extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {isEmpty: this.props.data.length > 0};
+  }
 
   formatTypeText(str) {
     // reference for title case: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
@@ -93,11 +97,13 @@ class PL_List extends React.Component{
    delete(id){
      // reference https://stackoverflow.com/questions/43230622/reactjs-how-to-delete-item-from-list
      this.props.delete(id);
+     this.setState((state, props) => ({isEmpty: props.data.length > 0}));
    }
 
    render(){
+     const isEmpty = this.state.isEmpty;
 
-     if (this.props.data.length > 0) {
+     if (isEmpty) {
        return(
           <ul className="list-group">
             {
