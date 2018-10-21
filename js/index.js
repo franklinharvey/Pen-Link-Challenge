@@ -11,45 +11,49 @@ document.getElementById("dataDisplay").addEventListener("click", function(e) {
 	if(e.target && e.target.nodeName == "BUTTON") {
     var removeIndex = data2.map(function(item) { return item.id; })
                            .indexOf(e.target.id);
-    console.log(removeIndex);
     for( var i = 0; i < data2.length; i++){
        if ( i === removeIndex) {
          data2.splice(i, 1);
        }
     }
     displayList(data2);
-    console.log(data2);
 		console.log("Button ", e.target.id, " pressed");
 	}
 });
 
 function displayList(data2) {
-  displayParent = document.getElementById('dataDisplay');
-  displayParent.innerHTML = "";
-  var listParent = document.createElement('ul');
-  listParent.className = "list-group"
-  for (var i in data2) {
-    h3 = document.createElement('h3');
-    h3.innerHTML = data2[i].title;
+	displayParent = document.getElementById('dataDisplay');
+	displayParent.innerHTML = "";
+	var listParent = document.createElement('ul');
+	listParent.className = "list-group"
+	if (data2.length>0){
+	  for (var i in data2) {
+	    h3 = document.createElement('h3');
+	    h3.innerHTML = data2[i].title;
 
-    span = document.createElement('span');
-    span.innerHTML = formatTypeText(data2[i].type);
+	    span = document.createElement('span');
+	    span.innerHTML = formatTypeText(data2[i].type);
 
-    removeButton = document.createElement('button');
-    removeButton.className = "btn btn-danger";
-		removeButton.type = "button";
-    removeButton.innerHTML = "REMOVE";
-    removeButton.id = data2[i].id
+	    removeButton = document.createElement('button');
+	    removeButton.className = "btn btn-danger";
+			removeButton.type = "button";
+	    removeButton.innerHTML = "REMOVE";
+	    removeButton.id = data2[i].id
 
-    listItem = document.createElement('li');
-    listItem.className = "list-group-item listItem"
-    listItem.appendChild(h3);
-    listItem.appendChild(span);
-    listItem.appendChild(document.createElement('hr'));
-    listItem.appendChild(removeButton);
+	    listItem = document.createElement('li');
+	    listItem.className = "list-group-item listItem"
+	    listItem.appendChild(h3);
+	    listItem.appendChild(span);
+	    listItem.appendChild(document.createElement('hr'));
+	    listItem.appendChild(removeButton);
 
-    listParent.appendChild(listItem);
-  }
+	    listParent.appendChild(listItem);
+	  }
+	}
+	else {
+		listParent.innerHTML = "Empty";
+		listParent.className = "text-muted text-center";
+	}
   displayParent.appendChild(listParent);
 }
 
