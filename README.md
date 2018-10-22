@@ -1,4 +1,4 @@
-# Pen-Link-Challenge
+# Pen Link Innovation Challenge
 
 #### Quick Start
 * run `localServer.sh`
