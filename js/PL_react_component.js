@@ -79,8 +79,8 @@ class PL_List extends React.Component{
 
   formatTypeText(str) {
     // reference for title case: https://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
-    str = str.replace(/_/g, " ")
-    str = str.replace(/-/g, " ")
+    str = str.replace(/_/g, " ");
+    str = str.replace(/-/g, " ");
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
@@ -117,13 +117,13 @@ class PL_List extends React.Component{
              )
             }
           </ul>
-       )
+       );
     } else {
       return(
         <ul className="text-muted text-center">Empty</ul>
-      )
+      );
     }
    }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+ReactDOM.render(<App/>, document.getElementById('app'));
